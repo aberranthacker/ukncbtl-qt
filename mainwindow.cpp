@@ -82,7 +82,7 @@ MainWindow::MainWindow(QWidget *parent) :
     vboxlayout->addWidget(m_screen);
     vboxlayout->addWidget(m_keyboard);
     ui->centralWidget->setLayout(vboxlayout);
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); //  + m_keyboard->maximumHeight());
     int maxwid = m_screen->maximumWidth() > m_keyboard->maximumWidth() ? m_screen->maximumWidth() : m_keyboard->maximumWidth();
     ui->centralWidget->setMaximumWidth(maxwid);
 
@@ -155,6 +155,7 @@ void MainWindow::closeEvent(QCloseEvent *)
     Global_getSettings()->setValue("MainWindow/Geometry", saveGeometry());
     Global_getSettings()->setValue("MainWindow/WindowState", saveState());
 
+    Global_getSettings()->setValue("MainWindow/OnscreenKeyboard", m_keyboard->isVisible());
     Global_getSettings()->setValue("MainWindow/ConsoleView", m_dockConsole->isVisible());
     Global_getSettings()->setValue("MainWindow/DebugView", m_dockDebug->isVisible());
     Global_getSettings()->setValue("MainWindow/DisasmView", m_dockDisasm->isVisible());
@@ -171,13 +172,14 @@ void MainWindow::restoreSettings()
     m_screen->setSizeMode(scrSizeMode);
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 
     //NOTE: Restore from maximized state fails, see https://bugreports.qt-project.org/browse/QTBUG-15080
     restoreGeometry(Global_getSettings()->value("MainWindow/Geometry").toByteArray());
     restoreState(Global_getSettings()->value("MainWindow/WindowState").toByteArray());
 
+    m_keyboard->setVisible(Global_getSettings()->value("MainWindow/OnscreenKeyboard", false).toBool());
     m_dockConsole->setVisible(Global_getSettings()->value("MainWindow/ConsoleView", false).toBool());
     m_dockDebug->setVisible(Global_getSettings()->value("MainWindow/DebugView", false).toBool());
     m_dockDisasm->setVisible(Global_getSettings()->value("MainWindow/DisasmView", false).toBool());
@@ -423,7 +425,7 @@ void MainWindow::viewSizeRegular()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeUpscaled()
@@ -432,7 +434,7 @@ void MainWindow::viewSizeUpscaled()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeDoubleInterlaced()
@@ -441,7 +443,7 @@ void MainWindow::viewSizeDoubleInterlaced()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeDouble()
@@ -450,7 +452,7 @@ void MainWindow::viewSizeDouble()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeUpscaled3()
@@ -459,7 +461,7 @@ void MainWindow::viewSizeUpscaled3()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeUpscaled4()
@@ -468,7 +470,7 @@ void MainWindow::viewSizeUpscaled4()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeUpscaled175()
@@ -477,7 +479,7 @@ void MainWindow::viewSizeUpscaled175()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 void MainWindow::viewSizeUpscaled5()
@@ -486,7 +488,7 @@ void MainWindow::viewSizeUpscaled5()
     UpdateMenu();
 
     //Update centralWidget size
-    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight() + m_keyboard->maximumHeight());
+    ui->centralWidget->setMaximumHeight(m_screen->maximumHeight()); // + m_keyboard->maximumHeight());
     ui->centralWidget->setMaximumWidth(m_screen->maximumWidth());
 }
 
