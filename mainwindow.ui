@@ -330,6 +330,9 @@
    <property name="text">
     <string>Step Into</string>
    </property>
+   <property name="shortcut">
+    <string>F7</string>
+   </property>
   </action>
   <action name="actionDebugStepOver">
    <property name="icon">
@@ -338,6 +341,9 @@
    </property>
    <property name="text">
     <string>Step Over</string>
+   </property>
+   <property name="shortcut">
+    <string>F8</string>
    </property>
   </action>
   <action name="actionDebugDebugView">
